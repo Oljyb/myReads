@@ -8,7 +8,7 @@ function Book (props) {
                 <div className="book-top">
                     <div
                         className="book-cover"
-                        style={{ backgroundImage: `url(${props.book.imageLinks.thumbnail})` }}>
+                        style={{ backgroundImage:`url(${props.book.imageLinks && props.book.imageLinks.thumbnail?`${props.book.imageLinks.thumbnail}`:`http://via.placeholder.com/128x193?text=No%20Cover`})` }}>
                     </div>
                     <div className="book-shelf-changer">
                         <select
