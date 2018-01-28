@@ -3,8 +3,8 @@ import * as BooksAPI from './BooksAPI';
 import '../css/App.css';
 import BooksShelf from './BooksShelf';
 import BooksSearch from './BooksSearch';
-import { Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import ErrorPage404 from './ErrorPage404';
+import { Route, Switch, Link } from 'react-router-dom';
 
 class BooksApp extends React.Component {
 
@@ -90,38 +90,43 @@ class BooksApp extends React.Component {
         return (
             <div className="app">
 
-                <Route path="/" exact render={() => (
-                    <div className="list-books">
-                        <div className="list-books-title">
-                            <h1>MyReads</h1>
+                <Switch>
+                    <Route path="/" exact render={() => (
+                        <div className="list-books">
+                            <div className="list-books-title">
+                                <h1>MyReads</h1>
+                            </div>
+                            <div className="list-books-content">
+                                {this.Shelves.map((shelf,)=>(
+                                    <BooksShelf
+                                        Shelves={this.Shelves}
+                                        key={shelf.state}
+                                        onShelfUpdate={this.onShelfUpdate}
+                                        title={shelf.title}
+                                        books={this.state.books.filter(book => {
+                                            return book.shelf === shelf.state;
+                                        })}
+                                    />
+                                ))}
+                            </div>
+                            <div className="open-search">
+                                <Link to="/search">Add a book</Link>
+                            </div>
                         </div>
-                        <div className="list-books-content">
-                            {this.Shelves.map((shelf,)=>(
-                                <BooksShelf
-                                    Shelves={this.Shelves}
-                                    key={shelf.state}
-                                    onShelfUpdate={this.onShelfUpdate}
-                                    title={shelf.title}
-                                    books={this.state.books.filter(book => {
-                                        return book.shelf === shelf.state;
-                                    })}
-                                />
-                            ))}
-                        </div>
-                        <div className="open-search">
-                            <Link to="/search">Add a book</Link>
-                        </div>
-                    </div>
-                )}/>
+                    )}/>
 
-                <Route path="/search" render={() => (
-                    <BooksSearch
-                        books={this.state.searchBooks}
-                        onShelfUpdate={this.onShelfUpdate}
-                        onBookSearch={this.onBookSearch}
-                        Shelves={this.Shelves}
-                    />
-                )}/>
+                    <Route path="/search" render={() => (
+                        <BooksSearch
+                            books={this.state.searchBooks}
+                            onShelfUpdate={this.onShelfUpdate}
+                            onBookSearch={this.onBookSearch}
+                            Shelves={this.Shelves}
+                        />
+                    )}/>
+
+                    <Route component={ErrorPage404}/>
+
+                </Switch>
 
             </div>
         )
