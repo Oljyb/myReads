@@ -3,7 +3,7 @@
 This is my submit of the final assessment project for Udacity's React Fundamentals course. Every student attending to the React Nanodegree has to provide this project.
 You can find the starter template [here](https://github.com/udacity/reactnd-project-myreads-starter)
 
-It's purpose is to find books directly from a search page and to classify them under 3 states/shelves : Currently reading, Want to read and Read.
+Its purpose is to find books directly from a search page and to classify them under 3 states/shelves : Currently reading, Want to read and Read.
 
 ## TL;DR
 
